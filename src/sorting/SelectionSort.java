@@ -19,10 +19,10 @@ public class SelectionSort {
           if (arr[j] < arr[minIndex]) {
             minIndex = j;
           }
-          int temp = arr[i];
-          arr[i] = arr[minIndex];
-          arr[minIndex] = temp;
         }
+        int temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
       }
       for (int x : arr) {
         System.out.print(x + " ");
