@@ -1,2 +1,95 @@
-*.iml
+# =========================
+# IntelliJ IDEA
+# =========================
 .idea/
+*.iws
+*.iml
+*.ipr
+
+# IntelliJ compiler output
+out/
+out/production/
+out/test/
+
+# =========================
+# Java compiled files
+# =========================
+*.class
+
+# =========================
+# Build directories
+# =========================
+target/
+build/
+
+# Gradle
+.gradle/
+
+# Maven
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+
+# =========================
+# OS generated files
+# =========================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# =========================
+# Environment / Secrets
+# =========================
+.env
+.env.*
+!.env.example
+
+# Application local configuration
+application-local.properties
+application-local.yml
+application-local.yaml
+
+# =========================
+# Java / Spring Boot
+# =========================
+spring-boot-devtools.properties
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# =========================
+# VS Code
+# =========================
+.vscode/
+
+# =========================
+# Eclipse
+# =========================
+.classpath
+.project
+.settings/
+
+# =========================
+# NetBeans
+# =========================
+/nbproject/private/
+/nbbuild/
+/dist/
+/.nb-gradle/
