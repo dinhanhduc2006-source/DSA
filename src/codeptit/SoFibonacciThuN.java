@@ -1,5 +1,6 @@
 package codeptit;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 //Thay vì tính F(n-1) và F(n-2), ta chỉ cần tính F(n/2) và F(n/2 + 1), sau đó dùng công thức để suy ra F(n).
@@ -44,6 +45,8 @@ public class SoFibonacciThuN {
       long[] result = solve(n);
 
       System.out.println(result[0]);
+
+      LinkedList lk = new LinkedList();
     }
   }
 }
