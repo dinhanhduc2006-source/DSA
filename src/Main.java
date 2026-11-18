@@ -1,49 +1,36 @@
-import java.io.BufferedInputStream;
-import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
-  public static void main(String[] args) throws IOException {
-    BufferedInputStream sc = new BufferedInputStream(System.in);
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    char[] s = br.readLine().trim().toCharArray();
+    int q = Integer.parseInt(br.readLine().trim());
 
-    int n = nextInt(sc);
-    StringBuilder result = new StringBuilder();
-
-    for (int i = 0; i < n; i++) {
-      boolean first = true;
-
-      for (int j = 0; j < n; j++) {
-        int x = nextInt(sc);
-
-        if (x == 1) {
-          if (!first) {
-            result.append(' ');
+    StringBuilder sb = new StringBuilder();
+    while (q-- > 0) {
+      StringTokenizer st = new StringTokenizer(br.readLine());
+      char type = st.nextToken().charAt(0);
+      if (type == 'q') {
+        int l = Integer.parseInt(st.nextToken()) - 1;
+        int r = Integer.parseInt(st.nextToken()) - 1;
+        boolean ok = true;
+        while (l < r) {
+          if (s[l] != s[r]) {
+            ok = false;
+            break;
           }
-
-          result.append(j + 1);
-          first = false;
+          l++;
+          r--;
         }
+        sb.append(ok ? "YES\n" : "NO\n");
+      } else {
+        int u = Integer.parseInt(st.nextToken()) - 1;
+        char x = st.nextToken().charAt(0);
+        s[u] = x;
       }
-
-      result.append('\n');
     }
-
-    System.out.print(result);
-  }
-
-  private static int nextInt(BufferedInputStream sc) throws IOException {
-    int c;
-
-    do {
-      c = sc.read();
-    } while (c <= ' ' && c != -1);
-
-    int num = 0;
-
-    while (c > ' ') {
-      num = num * 10 + c - '0';
-      c = sc.read();
-    }
-
-    return num;
+    System.out.print(sb);
   }
 }

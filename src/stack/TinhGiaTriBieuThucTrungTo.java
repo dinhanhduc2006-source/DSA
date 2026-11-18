@@ -8,64 +8,77 @@ public class TinhGiaTriBieuThucTrungTo {
   static int priority(char c) {
     if (c == '*' || c == '/') {
       return 2;
-    } else {
+    } else if (c == '+' || c == '-') {
       return 1;
     }
+    return 0;
   }
-  static int calculate(int s1,int s2, char c){
-    int result= 0;
-    if (c =='+'){
-      result=s1+s2;
-    } else if (c=='-') {
-      result=s1-s2;
-    } else if (c=='*') {
-      result=s1*s2;
-    } else {
-      result=s1/s2;
+
+  static long calculator(long s2, long s1, char c) {
+    if (c == '+') {
+      return s1 + s2;
+    } else if (c == '-') {
+      return s1 - s2;
+    } else if (c == '*') {
+      return s1 * s2;
     }
-    return result;
+    return s1 / s2;
   }
 
-  static int solve(String s) {
-    Stack<Integer> numbers = new Stack<>();
-    Stack<Character> operators = new Stack<>(); //luu toan tu va dau ( )
+  static long solve(String s) {
+    Stack<Long> numbers = new Stack<>();
+    Stack<Character> operators = new Stack<>();
 
-    int result=0;
+    long result = 0;
+
     for (int i = 0; i < s.length(); i++) {
       char c = s.charAt(i);
 
-      if (Character.isDigit(c)) {
-        numbers.push(Integer.parseInt(String.valueOf(c)));
-      } else if (c == '(') {
+      if (c == '(') {
         operators.push(c);
-      } else if (c== ')') {
-        while (!(operators.peek() == '(')){
-          result= calculate(numbers.pop(),numbers.pop(),c);
+      } else if (c == ')') {
+        while (!operators.empty() && operators.peek() != '(') {
+
+          result = calculator(numbers.pop(), numbers.pop(), operators.pop());
+
+          numbers.push(result);
         }
-        numbers.push(result);
         operators.pop();
+      } else if (Character.isDigit(c)) {
+
+        long number = 0;
+
+        while (i < s.length() && Character.isDigit(s.charAt(i))) {
+          number = 10 * number + (s.charAt(i) - '0');
+          i++;
+        }
+
+        numbers.push(number);
+
+        i--;
       } else {
-        while (priority(operators.peek())>=priority(c) && !operators.empty()){
-          result=calculate(numbers.pop(),numbers.pop(),operators.pop());
+        while (!operators.empty() && operators.peek() != '('
+            && priority(operators.peek()) >= priority(c)) {
+          result = calculator(numbers.pop(), numbers.pop(), operators.pop());
+          numbers.push(result);
         }
         operators.push(c);
       }
     }
-    while (!numbers.empty()){
-      if(operators.peek()!='('){
-        result=calculate(numbers.pop(),numbers.pop(),operators.pop());
-      } else {
-        operators.pop();
-      }
+    while (!operators.empty() && operators.peek() != '(') {
+      result = calculator(numbers.pop(), numbers.pop(), operators.pop());
+      numbers.push(result);
     }
-    return result;
+
+    return numbers.pop();
   }
+
 
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
-    int t =sc .nextInt();
-    while (t-->0){
-      String s =sc.next();
+    int t = sc.nextInt();
+    while (t-- > 0) {
+      String s = sc.next();
       System.out.println(solve(s));
     }
   }
